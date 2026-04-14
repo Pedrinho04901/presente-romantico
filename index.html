@@ -158,6 +158,17 @@ font-size:12px;
 
 <body onclick="startMusicOnce()">
 
+<script>
+/* =========================
+   VERIFICA SE O PUZZLE FOI CONCLUÍDO
+========================= */
+
+if(!sessionStorage.getItem("puzzleDone")){
+  window.location.href="puzzle.html";
+}
+</script>
+
+
 <div class="container">
 
 <audio id="player-audio" src="alice-jaguadarte.mp3"></audio>
