@@ -173,7 +173,16 @@ for(let i=0;i<current.length;i++){
 if(current[i].dataset.index!=i) return;
 }
 
+/* MOSTRA MENSAGEM */
 document.getElementById("message").style.display="block";
+
+/* SALVA QUE O PUZZLE FOI FEITO */
+sessionStorage.setItem("puzzleDone","true");
+
+/* REDIRECIONA PARA O PRESENTE */
+setTimeout(()=>{
+window.location.href="index.html";
+},2000);
 
 }
 
