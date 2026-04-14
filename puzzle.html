@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Monte o Quebra-Cabeça 💙</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:#020617;
+color:white;
+font-family:system-ui;
+}
+
+h1{
+margin-bottom:15px;
+}
+
+#puzzle{
+width:360px;
+height:360px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+grid-template-rows:repeat(3,1fr);
+gap:3px;
+}
+
+.piece{
+background-image:url("foto1.jpeg");
+background-size:300% 300%;
+cursor:pointer;
+border-radius:8px;
+transition:.2s;
+}
+
+.piece:hover{
+transform:scale(1.05);
+}
+
+.empty{
+background:none;
+cursor:default;
+}
+
+#message{
+margin-top:20px;
+font-size:20px;
+display:none;
+color:#7b8cff;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Monte nosso momento 💙</h1>
+
+<div id="puzzle"></div>
+
+<div id="message">
+✨ Você completou o quebra-cabeça! ✨
+</div>
+
+<script>
+
+/* ======================
+CONFIGURAÇÃO
+====================== */
+
+const size=3;
+let pieces=[];
+const puzzle=document.getElementById("puzzle");
+
+/* ======================
+CRIAR PEÇAS
+====================== */
+
+for(let i=0;i<size*size;i++){
+
+const piece=document.createElement("div");
+piece.classList.add("piece");
+
+if(i===size*size-1){
+piece.classList.add("empty");
+}else{
+
+const x=(i%size)*50;
+const y=Math.floor(i/size)*50;
+
+piece.style.backgroundPosition=`${x}% ${y}%`;
+}
+
+piece.dataset.index=i;
+pieces.push(piece);
+}
+
+shuffle();
+
+/* ======================
+EMBARALHAR
+====================== */
+
+function shuffle(){
+
+pieces.sort(()=>Math.random()-0.5);
+
+puzzle.innerHTML="";
+pieces.forEach(p=>puzzle.appendChild(p));
+
+}
+
+/* ======================
+MOVIMENTO
+====================== */
+
+puzzle.addEventListener("click",e=>{
+
+const clicked=e.target;
+if(!clicked.classList.contains("piece")) return;
+
+const empty=document.querySelector(".empty");
+
+const clickedIndex=[...puzzle.children].indexOf(clicked);
+const emptyIndex=[...puzzle.children].indexOf(empty);
+
+if(canMove(clickedIndex,emptyIndex)){
+swap(clicked,empty);
+checkWin();
+}
+
+});
+
+function canMove(i,e){
+
+const row=Math.floor(i/size);
+const col=i%size;
+
+const erow=Math.floor(e/size);
+const ecol=e%size;
+
+return(
+(row===erow && Math.abs(col-ecol)===1)||
+(col===ecol && Math.abs(row-erow)===1)
+);
+
+}
+
+function swap(a,b){
+const temp=document.createElement("div");
+puzzle.replaceChild(temp,a);
+puzzle.replaceChild(a,b);
+puzzle.replaceChild(b,temp);
+}
+
+/* ======================
+VERIFICAR VITÓRIA
+====================== */
+
+function checkWin(){
+
+const current=[...puzzle.children];
+
+for(let i=0;i<current.length;i++){
+if(current[i].dataset.index!=i) return;
+}
+
+document.getElementById("message").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
