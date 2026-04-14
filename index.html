@@ -1,281 +1,235 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pedro & Julia</title>
+<title>Em Breve</title>
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:system-ui;
-}
-
 body{
-background:radial-gradient(circle,#0b1224,#02040c);
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100vh;
+    margin:0;
+    height:100vh;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#020617;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
 }
 
+/* CARD PRINCIPAL */
 .container{
-width:420px;
-background:#050a18;
-padding:25px;
-border-radius:25px;
-text-align:center;
-box-shadow:0 0 40px rgba(0,0,0,.8);
+    width:90%;
+    max-width:1000px;
+    height:500px;
+    display:flex;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 0 40px rgba(0,120,255,.4);
 }
 
-/* PLAYER */
+/* AREA FOTO */
+.image-area{
+    width:50%;
+    position:relative;
+    background:black;
 
-.player{
-background:linear-gradient(135deg,#28437c,#3f6bd4);
-padding:12px;
-border-radius:18px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.player button{
-border:none;
-background:white;
-border-radius:50%;
-width:40px;
-height:40px;
-cursor:pointer;
-font-size:16px;
-}
-
-/* SLIDESHOW */
-
-.slideshow{
-position:relative;
-width:100%;
-height:430px;
-overflow:hidden;
-border-radius:20px;
-border:3px solid #7b8cff;
-margin-top:10px;
-}
-
+/* SLIDES */
 .slide{
-position:absolute;
-width:100%;
-height:100%;
-object-fit:cover;
-object-position:center center;
-opacity:0;
-transition:opacity 1s ease-in-out;
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+    transition:opacity 1s ease-in-out;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .slide.active{
-opacity:1;
+    opacity:1;
+}
+
+/* IMAGEM CENTRALIZADA */
+.slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+}
+
+/* AREA TEXTO */
+.content{
+    width:50%;
+    background:#020617;
+    padding:40px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+h1{
+    font-size:38px;
+    margin-bottom:20px;
 }
 
 /* CONTADOR */
-
-.counter-wrapper{
-margin-top:20px;
-display:flex;
-justify-content:center;
-gap:10px;
-flex-wrap:wrap;
+.countdown{
+    display:flex;
+    gap:15px;
 }
 
-.time-box{
-background:linear-gradient(135deg,#6fa8ff,#c07bff);
-padding:14px;
-border-radius:15px;
-width:80px;
-box-shadow:0 0 18px rgba(111,168,255,.5);
-animation:pulse 3s infinite;
+.box{
+    background:#0f172a;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    min-width:80px;
+    box-shadow:0 0 15px rgba(0,150,255,.5);
+    animation:pulse 2s infinite;
 }
 
-.time-number{
-font-size:22px;
-font-weight:bold;
+.box span{
+    font-size:30px;
+    font-weight:bold;
+    display:block;
 }
 
-.time-label{
-font-size:11px;
-opacity:.85;
+.label{
+    font-size:12px;
+    opacity:.8;
 }
 
+/* ANIMAÇÃO */
 @keyframes pulse{
-0%{transform:scale(1)}
-50%{transform:scale(1.06)}
-100%{transform:scale(1)}
+    0%{transform:scale(1)}
+    50%{transform:scale(1.05)}
+    100%{transform:scale(1)}
 }
 
-/* TEXTO */
+/* RESPONSIVO */
+@media(max-width:900px){
 
-.text{
-margin-top:18px;
-font-size:13px;
-line-height:1.6;
-opacity:.9;
+.container{
+    flex-direction:column;
+    height:auto;
 }
 
-/* BOTÃO */
-
-.btn{
-margin-top:20px;
-background:linear-gradient(135deg,#6fa8ff,#c07bff);
-border:none;
-padding:12px 25px;
-border-radius:999px;
-font-weight:bold;
-cursor:pointer;
-transition:.3s;
+.image-area,
+.content{
+    width:100%;
+    height:300px;
 }
 
-.btn:hover{
-transform:scale(1.05);
-}
-
-.names{
-margin-top:18px;
-opacity:.7;
-letter-spacing:2px;
-font-size:12px;
 }
 
 </style>
 </head>
 
-<body onclick="startMusicOnce()">
+<body>
 
 <div class="container">
 
-<audio id="player-audio" src="alice-jaguadarte.mp3"></audio>
+    <!-- AREA IMAGENS -->
+    <div class="image-area">
 
-<div class="player">
-<div>
-<strong>Alice e o Jaguadarte</strong><br>
-<small>Pedro & Julia</small>
-</div>
-<button onclick="startMusicOnce()">▶</button>
-</div>
+        <div class="slide active">
+            <img src="foto1.jpg">
+        </div>
 
-<!-- SLIDESHOW -->
-<div class="slideshow">
-<img src="foto1.jpeg" class="slide active">
-<img src="foto2.jpeg" class="slide">
-<img src="foto3.jpeg" class="slide">
-</div>
+        <div class="slide">
+            <img src="foto2.jpg">
+        </div>
 
-<h2 style="margin-top:15px;">Pedro & Julia 💙</h2>
-<p>Desde 02 de Março de 2025 às 18:00</p>
+        <div class="slide">
+            <img src="foto3.jpg">
+        </div>
 
-<!-- CONTADOR -->
-<div class="counter-wrapper">
+    </div>
 
-<div class="time-box">
-<div id="days" class="time-number">0</div>
-<div class="time-label">Dias</div>
-</div>
+    <!-- AREA TEXTO -->
+    <div class="content">
 
-<div class="time-box">
-<div id="hours" class="time-number">0</div>
-<div class="time-label">Horas</div>
-</div>
+        <h1>Estamos Chegando 🚀</h1>
 
-<div class="time-box">
-<div id="minutes" class="time-number">0</div>
-<div class="time-label">Min</div>
-</div>
+        <div class="countdown">
+            <div class="box">
+                <span id="days">00</span>
+                <div class="label">Dias</div>
+            </div>
 
-<div class="time-box">
-<div id="seconds" class="time-number">0</div>
-<div class="time-label">Seg</div>
-</div>
+            <div class="box">
+                <span id="hours">00</span>
+                <div class="label">Horas</div>
+            </div>
 
-</div>
+            <div class="box">
+                <span id="minutes">00</span>
+                <div class="label">Min</div>
+            </div>
 
-<p class="text">
-Cada segundo ao seu lado vira eternidade.
-Nosso amor continua crescendo todos os dias 💙
-</p>
+            <div class="box">
+                <span id="seconds">00</span>
+                <div class="label">Seg</div>
+            </div>
+        </div>
 
-<button class="btn">Eu te amo 💙</button>
-
-<div class="names">
-PEDRO • JULIA
-</div>
+    </div>
 
 </div>
 
 <script>
 
-/* =========================
-   MÚSICA AUTOMÁTICA
-========================= */
+/* ======================
+   CONTADOR
+====================== */
 
-let musicStarted=false;
+const launchDate = new Date("Dec 31, 2026 00:00:00").getTime();
 
-function startMusicOnce(){
-if(musicStarted) return;
-musicStarted=true;
+setInterval(() => {
 
-const audio=document.getElementById("player-audio");
-audio.currentTime=106;
-audio.play().catch(()=>{});
-}
+    const now = new Date().getTime();
+    const diff = launchDate - now;
 
-/* =========================
-   CONTADOR BRASÍLIA
-========================= */
+    document.getElementById("days").innerText =
+        Math.floor(diff/(1000*60*60*24));
 
-const startDate=new Date("2025-03-02T18:00:00-03:00");
+    document.getElementById("hours").innerText =
+        Math.floor((diff%(1000*60*60*24))/(1000*60*60));
 
-function updateCounter(){
+    document.getElementById("minutes").innerText =
+        Math.floor((diff%(1000*60*60))/(1000*60));
 
-const now=new Date();
-const diff=now-startDate;
+    document.getElementById("seconds").innerText =
+        Math.floor((diff%(1000*60))/1000);
 
-document.getElementById("days").innerText=
-Math.floor(diff/(1000*60*60*24));
+},1000);
 
-document.getElementById("hours").innerText=
-Math.floor((diff/(1000*60*60))%24);
 
-document.getElementById("minutes").innerText=
-Math.floor((diff/(1000*60))%60);
+/* ======================
+   SLIDE AUTOMÁTICO
+====================== */
 
-document.getElementById("seconds").innerText=
-Math.floor((diff/1000)%60);
+const slides = document.querySelectorAll(".slide");
 
-}
-
-setInterval(updateCounter,1000);
-updateCounter();
-
-/* =========================
-   SLIDESHOW AUTOMÁTICO
-========================= */
-
-let currentSlide=0;
-const slides=document.querySelectorAll(".slide");
+let index = 0;
 
 setInterval(()=>{
 
-slides[currentSlide].classList.remove("active");
+    slides[index].classList.remove("active");
 
-currentSlide++;
-if(currentSlide>=slides.length){
-currentSlide=0;
-}
+    index = (index + 1) % slides.length;
 
-slides[currentSlide].classList.add("active");
+    slides[index].classList.add("active");
 
 },2000);
 
