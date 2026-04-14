@@ -73,10 +73,8 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-
 object-fit:cover;
-object-position:center center; /* CENTRALIZA A FOTO */
-
+object-position:center center;
 opacity:0;
 transition:opacity 1s ease-in-out;
 }
@@ -154,20 +152,17 @@ font-size:12px;
 }
 
 </style>
-</head>
 
-<body onclick="startMusicOnce()">
-
+<!-- ✅ BLOQUEIO ANTES DE CARREGAR A PÁGINA -->
 <script>
-/* =========================
-   VERIFICA SE O PUZZLE FOI CONCLUÍDO
-========================= */
-
 if(!sessionStorage.getItem("puzzleDone")){
-  window.location.href="puzzle.html";
+   window.location.replace("puzzle.html");
 }
 </script>
 
+</head>
+
+<body onclick="startMusicOnce()">
 
 <div class="container">
 
@@ -181,7 +176,6 @@ if(!sessionStorage.getItem("puzzleDone")){
 <button onclick="startMusicOnce()">▶</button>
 </div>
 
-<!-- SLIDESHOW -->
 <div class="slideshow">
 <img src="foto1.jpeg" class="slide active">
 <img src="foto2.jpeg" class="slide">
@@ -191,7 +185,6 @@ if(!sessionStorage.getItem("puzzleDone")){
 <h2 style="margin-top:15px;">Pedro & Julia 💙</h2>
 <p>Desde 02 de Março de 2025 às 18:00</p>
 
-<!-- CONTADOR -->
 <div class="counter-wrapper">
 
 <div class="time-box">
@@ -231,9 +224,7 @@ PEDRO • JULIA
 
 <script>
 
-/* =========================
-   MÚSICA AUTOMÁTICA
-========================= */
+/* MÚSICA */
 
 let musicStarted=false;
 
@@ -246,9 +237,7 @@ audio.currentTime=106;
 audio.play().catch(()=>{});
 }
 
-/* =========================
-   CONTADOR BRASÍLIA
-========================= */
+/* CONTADOR */
 
 const startDate=new Date("2025-03-02T18:00:00-03:00");
 
@@ -274,9 +263,7 @@ Math.floor((diff/1000)%60);
 setInterval(updateCounter,1000);
 updateCounter();
 
-/* =========================
-   SLIDESHOW AUTOMÁTICO
-========================= */
+/* SLIDESHOW */
 
 let currentSlide=0;
 const slides=document.querySelectorAll(".slide");
